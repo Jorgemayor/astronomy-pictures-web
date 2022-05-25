@@ -21,7 +21,7 @@ const Table = ({ columns, data, isLoading, manualPagination = false }) => {
   return (
     <>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <h2>Loading pictures...</h2>
       ) : (
         <>
           <table {...getTableProps()}>
