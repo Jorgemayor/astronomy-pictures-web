@@ -7,7 +7,7 @@ const Home = () => {
 		rowData: [],
 		isLoading: false,
 		totalPages: 0,
-		totalPictures: 100,
+		totalPictures: 0,
 	})
 	
 	const [currentPage, setCurrentPage] = useState(1)
@@ -49,11 +49,6 @@ const Home = () => {
 					isLoading={pageData.isLoading}
 				/>
 			</div>
-			{/*<Pagination
-				totalRows={pageData.totalPictures}
-				pageChangeHandler={setCurrentPage}
-				rowsPerPage={currentLimit}
-			/>*/}
 		</div>
 	)
 }
