@@ -1,3 +1,5 @@
+import React from "react";
+
 const columns = [
 	{
 		Header: "Title",
@@ -17,12 +19,12 @@ const columns = [
 	},
 ]
 
-const formatRowData = (rawData) =>
-	rawData.map((data) => ({
-		title: data.title,
-		explanation: data.explanation,
-		url: data.url,
-		hdurl: data.hdurl,
+const formatData = (data) =>
+	data.map(picture => ({
+		title: picture.title,
+		explanation: picture.explanation,
+		url: (<a href={picture.url}>{picture.url}</a>),
+		hdurl: (<a href={picture.hdurl}>{picture.hdurl}</a>),
 	}))
 
 const getPictures = async (page= 1, limit=10) => {
@@ -36,4 +38,4 @@ const getPictures = async (page= 1, limit=10) => {
 	}
 }
 
-export { columns, formatRowData, getPictures }
+export { columns, formatData, getPictures }

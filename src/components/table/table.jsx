@@ -1,8 +1,8 @@
 import React, { useMemo } from "react"
 import { useTable } from "react-table"
-import styles from "./styles.css"
+import "./styles.css"
 
-const Table = ({ columns, data, isLoading, manualPagination = false }) => {
+const Table = ({ columns, data, manualPagination = false }) => {
   const columnData = useMemo(() => columns, [columns])
   const rowData = useMemo(() => data, [data])
   
@@ -19,10 +19,6 @@ const Table = ({ columns, data, isLoading, manualPagination = false }) => {
   })
   
   return (
-    <>
-      {isLoading ? (
-        <h2>Loading pictures...</h2>
-      ) : (
         <>
           <table {...getTableProps()}>
             <thead>
@@ -52,8 +48,6 @@ const Table = ({ columns, data, isLoading, manualPagination = false }) => {
             </tbody>
           </table>
         </>
-      )}
-    </>
   )
 }
 
