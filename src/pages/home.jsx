@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { getPictures, columns, formatData } from "./data"
 import Table from "../components/table/table"
-import { useForm } from "react-hook-form"
+import {Container, Col, Form, Row} from "react-bootstrap"
 import "./styles.css"
 
 const Home = () => {
@@ -16,10 +16,6 @@ const Home = () => {
 	const [currentLimit, setCurrentLimit] = useState(10)
 	
 	const pages = Array.from({length: pageData.totalPages}, (_, i) => i + 1)
-	
-	const { register, handleSubmit } = useForm();
-	const [dataForm, setDataForm] = useState("");
-	
 	
 	useEffect(() => {
 		setPageData(prevState => ({
@@ -45,30 +41,35 @@ const Home = () => {
 	}, [currentPage, currentLimit])
 	
 	return (
-		<div>
-			<p>Total Pictures: {pageData.totalPictures || ""}</p>
-			<label htmlFor="page"> Page </label>
-			<select id="page" onChange={(e) => setCurrentPage(e.target.value)}>
-				{
-					pages.map((item) =>
-						<option value={item}>{item}</option>
-					)
-				}
-			</select>
-			<label htmlFor="limit"> Limit </label>
-			<select id="limit" onChange={(e) => setCurrentLimit(e.target.value)}>
-				<option value={10}>{10}</option>
-				<option value={15}>{15}</option>
-				<option value={20}>{20}</option>
-			</select>
-			{/*<form onSubmit={handleSubmit((dataForm) => setData(JSON.stringify(dataForm)))}>
-				<input {...register("firstName")} placeholder="First name" />
-				
-				<textarea {...register("aboutYou")} placeholder="About you" />
-				<p>{dataForm}</p>
-				<input type="submit" />
-			</form>*/}
-			<div className="home">
+		<Container>
+			<Row>
+				<p>Total Pictures: {pageData.totalPictures || ""}</p>
+			</Row>
+			
+			<Form>
+				<Row className="mb-3">
+					<Col>
+						<Form.Label htmlFor="page"> Page </Form.Label>
+						<Form.Select id="page" onChange={(e) => setCurrentPage(e.target.value)}>
+							{
+								pages.map((item) =>
+									<option value={item}>{item}</option>
+								)
+							}
+						</Form.Select>
+					</Col>
+					<Col>
+						<Form.Label htmlFor="limit"> Limit </Form.Label>
+						<Form.Select id="limit" onChange={(e) => setCurrentLimit(e.target.value)}>
+							<option value={10}>{10}</option>
+							<option value={15}>{15}</option>
+							<option value={20}>{20}</option>
+						</Form.Select>
+					</Col>
+				</Row>
+			</Form>
+			
+			<Row className="home">
 				{pageData.isLoading ? (
 					<h2>Loading pictures...</h2>
 				) : (
@@ -76,8 +77,8 @@ const Home = () => {
 					columns={columns}
 					data={pageData.rowData}
 				/>)}
-			</div>
-		</div>
+			</Row>
+		</Container>
 	)
 }
 
